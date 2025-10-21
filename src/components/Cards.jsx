@@ -1,6 +1,8 @@
 import React from "react";
 
+
 function Card({ book }) {
+
   const { title, authors, formats } = book;
   const image = formats["image/jpeg"];
 

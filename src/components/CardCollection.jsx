@@ -2,7 +2,6 @@ import React from "react";
 import Card from "./Cards";
 
 function CardCollection({ books }) {
-  // Optionally show only 30 books
   const limitedBooks = books.slice(0, 30);
 
   return (

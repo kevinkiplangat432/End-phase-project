@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardCollection from "./components/CardCollection";
+import Header from "./components/Header";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -23,10 +24,12 @@ function App() {
   }
 
   return (
+    <>
+    <Header/>
     <div style={{ padding: "20px" }}>
-      <h1 style={{ textAlign: "center" }}>Gutendex Books</h1>
       <CardCollection books={books} />
     </div>
+    </>
   );
 }
 

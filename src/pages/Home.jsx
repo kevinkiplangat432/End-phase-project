@@ -1,14 +1,35 @@
 // src/pages/Home.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Spinner from "../components/Spinner";
+import BookCard from "../components/BookCard";
+import BookList from "../components/Booklist";
 
 function Home() {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch books from Gutendex API
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("https://gutendex.com/books/");
+        const data = await response.json();
+        setBooks(data.results); // results contains the array of books
+      } catch (error) {
+        console.error("Failed to fetch books:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
+  if (loading) return <Spinner />;
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
-      <h1 className="text-4xl font-bold mb-4">Welcome to Readify</h1>
-      <p className="text-lg text-gray-600 dark:text-gray-400">
-        Your digital reading hub — explore, read, and enjoy.
-      </p>
-    </main>
+    <BookList books={books} />
   );
 }
 

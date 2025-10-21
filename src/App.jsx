@@ -18,11 +18,6 @@ function App() {
           {/* Header */}
           <Header />
 
-          {/* Dark mode toggle - fixed at top right */}
-          <div className="fixed top-4 right-4 z-50">
-            <DarkModeToggle />
-          </div>
-
           {/* Main content area */}
           <main className="flex-grow container mx-auto px-4 py-8">
             <Suspense fallback={<Spinner />}>

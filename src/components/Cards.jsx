@@ -1,6 +1,8 @@
 import React from "react";
 
-function BookCard({ book }) {
+
+function Card({ book }) {
+
   const { title, authors, formats } = book;
   const image = formats["image/jpeg"];
 
@@ -36,4 +38,4 @@ function BookCard({ book }) {
   );
 }
 
-export default BookCard;
+export default Card;

@@ -1,12 +1,45 @@
 import React from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
+import BookList from "../components/BookList";
 
 function Library() {
+  const [libraryBooks, setLibraryBooks] = useLocalStorage("libraryBooks", []);
+  const [likedBooks, setLikedBooks] = useLocalStorage("likedBooks", []);
+
+  const toggleLibrary = (book) => {
+    setLibraryBooks((prev) => {
+      const exists = prev.find((b) => b.id === book.id);
+      if (exists) return prev.filter((b) => b.id !== book.id);
+      return [book, ...prev];
+    });
+  };
+
+  const toggleLike = (book) => {
+    setLikedBooks((prev) => {
+      const exists = prev.find((b) => b.id === book.id);
+      if (exists) return prev.filter((b) => b.id !== book.id);
+      return [book, ...prev];
+    });
+  };
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
-      <h1 className="text-4xl font-bold mb-4">📖 My Library</h1>
-      <p className="text-lg text-gray-600 dark:text-gray-400">
-        Here you’ll find all the books you’ve liked or saved for later.
-      </p>
+    <main className="min-h-screen">
+      <div className="container mx-auto px-4 py-6">
+        <h1 className="text-3xl font-bold mb-3">📚 My Library</h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-6">Books you added to your library are shown here.</p>
+
+        {libraryBooks.length === 0 ? (
+          <p className="text-gray-500 dark:text-gray-400">Your library is empty. Add books from Home.</p>
+        ) : (
+          <BookList
+            books={libraryBooks}
+            likedBooks={likedBooks}
+            toggleLike={toggleLike}
+            libraryBooks={libraryBooks}
+            toggleLibrary={toggleLibrary}
+          />
+        )}
+      </div>
     </main>
   );
 }

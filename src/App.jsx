@@ -41,10 +41,6 @@ function App() {
 
           {/* Optional footer */}
           <footer className="text-center py-4 border-t border-gray-300 dark:border-gray-700">
-            <p className="text-sm">
-              Built with by Kevin Kiplangat •{" "}
-              <span className="font-medium">Readify</span>
-            </p>
           </footer>
         </div>
       </Router>

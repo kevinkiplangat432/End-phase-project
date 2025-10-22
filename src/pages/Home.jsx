@@ -1,35 +1,50 @@
 // src/pages/Home.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Spinner from "../components/Spinner";
-import BookCard from "../components/BookCard";
 import BookList from "../components/Booklist";
+import Pagination from "../components/Pagination";
 
 function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-  // Fetch books from Gutendex API
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("https://gutendex.com/books/");
-        const data = await response.json();
-        setBooks(data.results); // results contains the array of books
-      } catch (error) {
-        console.error("Failed to fetch books:", error);
-      } finally {
-        setLoading(false);
+  const fetchBooks = useCallback(async (pageNum = 1) => {
+    try {
+      setLoading(true);
+      const res = await fetch(`https://gutendex.com/books/?page=${pageNum}`);
+      const data = await res.json();
+
+      if (data.results.length === 0) {
+        setHasMore(false);
+        return;
       }
-    };
 
-    fetchBooks();
+      setBooks((prev) => [...prev, ...data.results]); // append
+      setPage(pageNum);
+    } catch (error) {
+      console.error("Failed to fetch books:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  if (loading) return <Spinner />;
+  useEffect(() => {
+    fetchBooks(1);
+  }, [fetchBooks]);
+
+  const handleLoadMore = () => {
+    if (!loading && hasMore) {
+      fetchBooks(page + 1);
+    }
+  };
 
   return (
-    <BookList books={books} />
+    <div>
+      <BookList books={books} />
+      <Pagination onLoadMore={handleLoadMore} hasMore={hasMore} loading={loading} />
+    </div>
   );
 }
 

@@ -38,8 +38,7 @@ function App() {
 
           <footer className="text-center py-4 border-t border-gray-300 dark:border-gray-700">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              © {new Date().getFullYear()} Readify — built with ❤️
-            </p>
+              © {new Date().getFullYear()} Readify -build by Team Readify courtesy of the Gutendex Project        </p>
           </footer>
         </div>
       </Router>

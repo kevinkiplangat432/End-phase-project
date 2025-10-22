@@ -1,13 +1,12 @@
-// src/components/ThemeContext.jsx
-import React, { createContext, useState, useEffect, useContext } from "react";
-import useLocalStorage from "../hooks/useLocalStorage"; // adjust path if needed
+import React, { createContext, useContext } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useLocalStorage("theme", "light");
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
@@ -15,9 +14,7 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
+  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

@@ -1,10 +1,8 @@
-// src/components/Filter.jsx
 import React from "react";
 
 function Filter({ language, onLanguageChange, sortOption, onSortChange }) {
   return (
-    <div className="flex gap-4">
-      {/* Language Filter */}
+    <div className="flex gap-3 items-center">
       <select
         value={language}
         onChange={(e) => onLanguageChange(e.target.value)}
@@ -18,7 +16,6 @@ function Filter({ language, onLanguageChange, sortOption, onSortChange }) {
         <option value="it">Italian</option>
       </select>
 
-      {/* Sort Option */}
       <select
         value={sortOption}
         onChange={(e) => onSortChange(e.target.value)}

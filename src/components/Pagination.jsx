@@ -1,4 +1,3 @@
-// src/components/Pagination.jsx
 import React, { useEffect, useRef } from "react";
 
 function Pagination({ onLoadMore, hasMore, loading }) {
@@ -13,26 +12,23 @@ function Pagination({ onLoadMore, hasMore, loading }) {
           onLoadMore();
         }
       },
-      { threshold: 1.0 }
+      { root: null, rootMargin: "200px", threshold: 0.2 }
     );
 
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
-    }
+    const el = loaderRef.current;
+    if (el) observer.observe(el);
 
     return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
+      if (el) observer.unobserve(el);
     };
   }, [onLoadMore, hasMore, loading]);
 
   return (
-    <div ref={loaderRef} className="flex justify-center py-8">
+    <div ref={loaderRef} className="flex justify-center py-6">
       {loading ? (
-        <div className="w-8 h-8 border-4 border-gray-300 dark:border-gray-700 border-t-blue-500 rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-gray-300 dark:border-gray-700 border-t-blue-500 rounded-full animate-spin" />
       ) : (
-        hasMore && (
-          <p className="text-gray-500 dark:text-gray-400">Scroll to load more...</p>
-        )
+        hasMore && <p className="text-gray-500 dark:text-gray-400">Scroll to load more...</p>
       )}
     </div>
   );

@@ -1,32 +1,43 @@
-// src/pages/Home.jsx
 import React, { useState, useEffect, useCallback } from "react";
 import Spinner from "../components/Spinner";
-import BookList from "../components/Booklist";
+import BookList from "../components/BookList";
 import Pagination from "../components/Pagination";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function Home() {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  // liked and library state
+  const [likedBooks, setLikedBooks] = useLocalStorage("likedBooks", []);
+  const [libraryBooks, setLibraryBooks] = useLocalStorage("libraryBooks", []);
+
   const fetchBooks = useCallback(async (pageNum = 1) => {
     try {
-      setLoading(true);
+      if (pageNum === 1) {
+        setInitialLoading(true);
+      } else {
+        setLoadingMore(true);
+      }
+
       const res = await fetch(`https://gutendex.com/books/?page=${pageNum}`);
       const data = await res.json();
 
-      if (data.results.length === 0) {
+      if (!data || !data.results || data.results.length === 0) {
         setHasMore(false);
         return;
       }
 
-      setBooks((prev) => [...prev, ...data.results]); // append
+      setBooks((prev) => (pageNum === 1 ? data.results : [...prev, ...data.results]));
       setPage(pageNum);
     } catch (error) {
       console.error("Failed to fetch books:", error);
     } finally {
-      setLoading(false);
+      setInitialLoading(false);
+      setLoadingMore(false);
     }
   }, []);
 
@@ -35,15 +46,46 @@ function Home() {
   }, [fetchBooks]);
 
   const handleLoadMore = () => {
-    if (!loading && hasMore) {
+    if (!loadingMore && hasMore) {
       fetchBooks(page + 1);
     }
   };
 
+  const toggleLike = (book) => {
+    setLikedBooks((prev) => {
+      const exists = prev.find((b) => b.id === book.id);
+      if (exists) return prev.filter((b) => b.id !== book.id);
+      return [book, ...prev];
+    });
+  };
+
+  const toggleLibrary = (book) => {
+    setLibraryBooks((prev) => {
+      const exists = prev.find((b) => b.id === book.id);
+      if (exists) return prev.filter((b) => b.id !== book.id);
+      return [book, ...prev];
+    });
+  };
+
   return (
     <div>
-      <BookList books={books} />
-      <Pagination onLoadMore={handleLoadMore} hasMore={hasMore} loading={loading} />
+      {initialLoading ? (
+        <div className="flex flex-col items-center justify-center">
+          <Spinner />
+        </div>
+      ) : (
+        <>
+          <BookList
+            books={books}
+            likedBooks={likedBooks}
+            toggleLike={toggleLike}
+            libraryBooks={libraryBooks}
+            toggleLibrary={toggleLibrary}
+          />
+
+          <Pagination onLoadMore={handleLoadMore} hasMore={hasMore} loading={loadingMore} />
+        </>
+      )}
     </div>
   );
 }

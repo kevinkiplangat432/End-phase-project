@@ -3,7 +3,6 @@ import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeContext";
 import Header from "./components/Header";
-import DarkModeToggle from "./components/DarkModeToggle";
 import Spinner from "./components/Spinner";
 
 // Pages
@@ -15,11 +14,9 @@ function App() {
     <ThemeProvider>
       <Router>
         <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
-          {/* Header */}
           <Header />
 
-          {/* Main content area */}
-          <main className="flex-grow container mx-auto px-4 py-8">
+          <main className="flex-grow container mx-auto px-4 py-6">
             <Suspense fallback={<Spinner />}>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -39,11 +36,9 @@ function App() {
             </Suspense>
           </main>
 
-          {/* Optional footer */}
           <footer className="text-center py-4 border-t border-gray-300 dark:border-gray-700">
-            <p className="text-sm">
-              Built with by Kevin Kiplangat •{" "}
-              <span className="font-medium">Readify</span>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              © {new Date().getFullYear()} Readify — built with ❤️
             </p>
           </footer>
         </div>

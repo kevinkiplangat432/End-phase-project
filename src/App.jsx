@@ -1,5 +1,4 @@
-// src/App.jsx
-import React, { Suspense } from "react";
+import React, { Suspense } from "react"; // suspense for lazy loading
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeContext";
 import Header from "./components/Header";
@@ -11,14 +10,18 @@ import Library from "./pages/Library";
 
 function App() {
   return (
+    // context provider for theme
     <ThemeProvider>
+      {/* routes */}
       <Router>
         <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
           <Header />
 
           <main className="flex-grow container mx-auto px-4 py-6">
+            {/* lazy loading */}
             <Suspense fallback={<Spinner />}>
               <Routes>
+                {/* routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/library" element={<Library />} />
                 <Route

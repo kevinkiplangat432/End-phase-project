@@ -1,5 +1,5 @@
 import React from "react";
-
+// Filter component for language and sorting options
 function Filter({ language, onLanguageChange, sortOption, onSortChange }) {
   return (
     <div className="flex gap-3 items-center">

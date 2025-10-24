@@ -27,7 +27,7 @@ function Home() {
         setLoadingMore(true);
       }
 
-      const res = await fetch(https://gutendex.com/books/?page=${pageNum});
+      const res = await fetch(`https://gutendex.com/books/?page=${pageNum}`);
       const data = await res.json();
 
       if (!data || !data.results || data.results.length === 0) {

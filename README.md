@@ -2,14 +2,10 @@
 
 Readify is a **React + Tailwind CSS** web application that lets users discover, filter, sort, and read books fetched from the **Gutendex API** (Project Gutenberg).
 It was developed as a **group project** to demonstrate our understanding of modern web development concepts such as React components, API fetching, context management, and responsive UI design.
-
 ---
-
 ## Live Demo
 
-
 https://readify-10.netlify.app/
-
 ---
 
 ## Project Overview

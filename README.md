@@ -8,7 +8,7 @@ It was developed as a **group project** to demonstrate our understanding of mode
 ## Live Demo
 
 
- [Readify Live Demo](https://your-deployment-link.com)
+https://readify-10.netlify.app/
 
 ---
 

@@ -3,7 +3,7 @@ import { useTheme } from "./ThemeContext";
 
 function DarkModeToggle() {
   const { theme, toggleTheme } = useTheme();
-
+  // Dark mode toggle button
   return (
     <button
       onClick={toggleTheme}

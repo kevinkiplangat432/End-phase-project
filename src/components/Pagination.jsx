@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
-
+// Pagination component for infinite scrolling
 function Pagination({ onLoadMore, hasMore, loading }) {
+  // Ref for the loader element
   const loaderRef = useRef();
-
+  // Setup Intersection Observer to trigger loading more items
   useEffect(() => {
     if (!hasMore || loading) return;
-
+    // Create an Intersection Observer
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -14,7 +15,7 @@ function Pagination({ onLoadMore, hasMore, loading }) {
       },
       { root: null, rootMargin: "200px", threshold: 0.2 }
     );
-
+    // Observe the loader element
     const el = loaderRef.current;
     if (el) observer.observe(el);
 

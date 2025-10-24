@@ -64,9 +64,9 @@ function BookList({ books, likedBooks, toggleLike, libraryBooks, toggleLibrary }
                   book={book}
                   onView={(b) => setSelectedBook(b)}
                   liked={liked}
-                  onToggleLike={toggleLike} // like state
-                  inLibrary={inLibrary}     // library state
-                  onToggleLibrary={toggleLibrary}  // toggle library
+                  onToggleLike={toggleLike} 
+                  inLibrary={inLibrary}     
+                  onToggleLibrary={toggleLibrary}  
                 />
               </div>
             );

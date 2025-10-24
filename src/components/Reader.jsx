@@ -92,9 +92,11 @@ function Reader({ book, onClose }) {
             <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">Try another book or check the formats.</p>
           </div>
         ) : (
-          <article className="prose prose-lg dark:prose-invert max-w-none" style={{ fontSize: ${fontSize}px, whiteSpace: "pre-wrap" }}>
-            {content}
-          </article>
+          <div
+            className="prose dark:prose-invert"
+            style={{ fontSize: `${fontSize}px` }}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         )}
       </div>
     </div>
@@ -102,3 +104,4 @@ function Reader({ book, onClose }) {
 }
 
 export default Reader;
+        

@@ -1,4 +1,5 @@
-import React, { Suspense } from "react"; // suspense for lazy loading
+import React, { Suspense } from "react";
+import { AuthProvider } from "./components/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeContext";
 import Header from "./components/Header";
@@ -7,23 +8,26 @@ import Spinner from "./components/Spinner";
 // Pages
 import Home from "./pages/Home";
 import Library from "./pages/Library";
+import Signup from "./pages/SignUp";
+import Login from "./pages/Login";
+
+
 
 function App() {
   return (
-    // context provider for theme
     <ThemeProvider>
-      {/* routes */}
+      <AuthProvider>
       <Router>
         <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
           <Header />
 
           <main className="flex-grow container mx-auto px-4 py-6">
-            {/* lazy loading */}
             <Suspense fallback={<Spinner />}>
               <Routes>
-                {/* routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/library" element={<Library />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route
                   path="*"
                   element={
@@ -45,6 +49,7 @@ function App() {
           </footer>
         </div>
       </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

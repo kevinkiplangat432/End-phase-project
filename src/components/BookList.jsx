@@ -4,25 +4,24 @@ import Filter from "./Filter";
 import SearchBar from "./SearchBar";
 import BookModal from "./BookModal";
 import Reader from "./Reader";
-
+// Fuzzy matching function for search
 function fuzzyMatch(text = "", query = "") {
   if (!query) return true;
   const t = text.toLowerCase();
   const q = query.trim().toLowerCase();
-  // split query into tokens and check any token appears in text
   return q.split(/\s+/).every((token) => t.includes(token));
 }
-
+// BookList component to display list of books with search and filter
 function BookList({ books, likedBooks, toggleLike, libraryBooks, toggleLibrary }) {
   const [selectedBook, setSelectedBook] = useState(null);
   const [readingBook, setReadingBook] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [language, setLanguage] = useState("all");
   const [sortOption, setSortOption] = useState("default");
-
+// Memoized filtered books based on search, language, and sort options
   const filteredBooks = useMemo(() => {
     let filtered = books || [];
-
+// Apply search filter
     if (searchQuery) {
       filtered = filtered.filter((book) => {
         const title = book.title || "";
@@ -30,7 +29,7 @@ function BookList({ books, likedBooks, toggleLike, libraryBooks, toggleLibrary }
         return fuzzyMatch(title, searchQuery) || fuzzyMatch(authors, searchQuery);
       });
     }
-
+// Apply language filter
     if (language !== "all") {
       filtered = filtered.filter((book) => (book.languages || []).includes(language));
     }
@@ -55,21 +54,29 @@ function BookList({ books, likedBooks, toggleLike, libraryBooks, toggleLibrary }
         <p className="text-center text-gray-500 dark:text-gray-400 mt-10">No books found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
-          {filteredBooks.map((book) => (
-            <div key={book.id} onClick={() => setSelectedBook(book)} className="cursor-pointer">
-              <BookCard
-                book={book}
-                onView={(b) => setSelectedBook(b)}
-                liked={!!likedBooks.find((x) => x.id === book.id)}
-                onToggleLike={toggleLike}
-              />
-            </div>
-          ))}
+          {filteredBooks.map((book) => {
+            const liked = likedBooks.some((x) => x.id === book.id);
+            const inLibrary = libraryBooks.some((x) => x.id === book.id);
+
+            return (
+              <div key={book.id} className="cursor-pointer">
+                <BookCard
+                  book={book}
+                  onView={(b) => setSelectedBook(b)}
+                  liked={liked}
+                  onToggleLike={toggleLike} 
+                  inLibrary={inLibrary}     
+                  onToggleLibrary={toggleLibrary}  
+                />
+              </div>
+            );
+          })}
         </div>
       )}
 
       {/* Modal view */}
       {selectedBook && (
+        // BookModal component for detailed book view
         <BookModal
           book={selectedBook}
           onClose={() => setSelectedBook(null)}

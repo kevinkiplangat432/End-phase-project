@@ -1,12 +1,51 @@
-import React, { useEffect, useState } from "react";
-import CardCollection from "./components/CardCollection";
+import React, { Suspense } from "react"; // suspense for lazy loading
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./components/ThemeContext";
+import Header from "./components/Header";
+import Spinner from "./components/Spinner";
+
+// Pages
+import Home from "./pages/Home";
+import Library from "./pages/Library";
 
 function App() {
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 style={{ textAlign: "center" }}>Gutendex Books</h1>
-      <CardCollection books={books} />
-    </div>
+    // context provider for theme
+    <ThemeProvider>
+      {/* routes */}
+      <Router>
+        <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+          <Header />
+
+          <main className="flex-grow container mx-auto px-4 py-6">
+            {/* lazy loading */}
+            <Suspense fallback={<Spinner />}>
+              <Routes>
+                {/* routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/library" element={<Library />} />
+                <Route
+                  path="*"
+                  element={
+                    <div className="text-center mt-20">
+                      <h2 className="text-3xl font-semibold mb-4">404 - Page Not Found</h2>
+                      <p className="text-gray-500 dark:text-gray-400">
+                        Sorry, the page you’re looking for doesn’t exist.
+                      </p>
+                    </div>
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </main>
+
+          <footer className="text-center py-4 border-t border-gray-300 dark:border-gray-700">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              © {new Date().getFullYear()} Readify -build by Team Readify courtesy of the Gutendex Project        </p>
+          </footer>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

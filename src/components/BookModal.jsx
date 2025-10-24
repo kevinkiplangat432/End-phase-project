@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-
+// BookModal component for displaying detailed book information
 function BookModal({ book, onClose, onRead, inLibrary, onToggleLibrary }) {
   const overlayRef = useRef();
-
+// Close modal on Escape key press
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
@@ -10,13 +10,13 @@ function BookModal({ book, onClose, onRead, inLibrary, onToggleLibrary }) {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
-
+  // Close modal when clicking outside the content
   const clickOutside = (e) => {
     if (e.target === overlayRef.current) onClose();
   };
 
   if (!book) return null;
-
+  // Destructure book details
   const cover = book.formats["image/jpeg"] || book.formats["image/png"] || null;
   const authors = book.authors?.map((a) => a.name).join(", ") || "Unknown";
 
@@ -75,7 +75,7 @@ function BookModal({ book, onClose, onRead, inLibrary, onToggleLibrary }) {
 
               <button
                 onClick={() => onToggleLibrary(book)}
-                className={`px-4 py-2 rounded-md transition ${inLibrary ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+                className={px-4 py-2 rounded-md transition ${inLibrary ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700'}}
               >
                 {inLibrary ? "Remove from Library" : "Add to Library"}
               </button>

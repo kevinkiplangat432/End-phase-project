@@ -3,8 +3,12 @@ import Spinner from "../components/Spinner";
 import BookList from "../components/BookList";
 import Pagination from "../components/Pagination";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useAuth } from "../components/AuthContext";
 
 function Home() {
+  const { currentUser } = useAuth();
+  const [showPrompt, setShowPrompt] = useState(false);
+
   const [books, setBooks] = useState([]);
   const [initialLoading, setInitialLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -23,7 +27,7 @@ function Home() {
         setLoadingMore(true);
       }
 
-      const res = await fetch(`https://gutendex.com/books/?page=${pageNum}`);
+      const res = await fetch(https://gutendex.com/books/?page=${pageNum});
       const data = await res.json();
 
       if (!data || !data.results || data.results.length === 0) {

@@ -10,11 +10,13 @@ function Login() {
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     try {
       await login(email, password);
-      navigate("/"); //  to Home after successful login
+      navigate("/"); //  home after successful login
     } catch (err) {
+      
       setError(err.message);
     }
   };

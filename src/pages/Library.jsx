@@ -7,17 +7,25 @@ function Library() {
   const [likedBooks, setLikedBooks] = useLocalStorage("likedBooks", []);
 
   const toggleLibrary = (book) => {
+
     setLibraryBooks((prev) => {
+
       const exists = prev.find((b) => b.id === book.id);
+
       if (exists) return prev.filter((b) => b.id !== book.id);
+
       return [book, ...prev];
     });
   };
 
   const toggleLike = (book) => {
+
     setLikedBooks((prev) => {
+
       const exists = prev.find((b) => b.id === book.id);
+
       if (exists) return prev.filter((b) => b.id !== book.id);
+              
       return [book, ...prev];
     });
   };

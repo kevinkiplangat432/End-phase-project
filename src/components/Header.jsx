@@ -43,7 +43,7 @@ function Header() {
           <NavLink to="/" className={linkClasses}>
             Home
           </NavLink>
-          <NavLink to="/favorites" className={linkClasses}>
+          <NavLink to="/favourites" className={linkClasses}>
             Favorites
           </NavLink>
 

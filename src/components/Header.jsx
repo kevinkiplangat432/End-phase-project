@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
 import { useAuth } from "./AuthContext";
+import Favorites from "../pages/Favourites";
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -126,6 +127,11 @@ function Header() {
                 Library
               </NavLink>
             )}
+            <NavLink
+            to={Favorites}
+            className={linkClasses}
+            onClick={()=> setMobileOpen(false)}
+            >Favorites</NavLink>
 
             {!currentUser ? (
               <>

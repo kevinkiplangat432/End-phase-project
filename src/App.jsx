@@ -4,13 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeContext";
 import Header from "./components/Header";
 import Spinner from "./components/Spinner";
-
-// Pages
 import Home from "./pages/Home";
 import Library from "./pages/Library";
 import Signup from "./pages/SignUp";
 import Login from "./pages/Login";
-
+import Favorites from "./pages/Favourites";
 
 
 function App() {
@@ -26,6 +24,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/library" element={<Library />} />
+                <Route path="/favorites" element={<Favorites />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route

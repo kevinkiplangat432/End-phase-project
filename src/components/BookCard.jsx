@@ -100,7 +100,7 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
               View
             </button>
 
-            {/* Add to Library button (only shown after View) */}
+            {/* Add to Library button (only shown after View)
             {viewed && (
               <button
                 onClick={handleAddToLibrary}
@@ -108,7 +108,7 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
               >
                 {inLibrary ? "Remove" : "Add to Library"}
               </button>
-            )}
+            )} */}
           </div>
         </div>
       </div>

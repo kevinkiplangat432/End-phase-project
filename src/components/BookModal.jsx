@@ -82,15 +82,6 @@ function BookModal({ book, onClose, onRead, inLibrary, onToggleLibrary }) {
               >
                 {inLibrary ? "Remove from Library" : "Add to Library"}
               </button>
-                  {/* Add to Library button (only shown after View)
-            {viewed && (
-              <button
-                onClick={handleAddToLibrary}
-                className="px-3 py-1.5 bg-green-600 text-white rounded-md text-sm hover:bg-green-700 transition"
-              >
-                {inLibrary ? "Remove" : "Add to Library"}
-              </button>
-            )} */}
             </div>
           </div>
         </div>

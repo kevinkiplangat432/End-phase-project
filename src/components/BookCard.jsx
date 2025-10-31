@@ -95,9 +95,7 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
       </div>
 
       <div className="book-card">
-        <img src={book.image} alt={book.title} />
-        <h3>{book.title}</h3>
-        <p>{book.author}</p>
+
         <Ratings />
       </div>
 

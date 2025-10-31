@@ -14,30 +14,48 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
   const cover = formats["image/jpeg"] || formats["image/png"] || null;
 // Handler for like button click
   const handleToggleLike = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // prevent card click
+
     if (!currentUser) { 
+
       setShowPrompt(true);
+
       return;
     }
     onToggleLike(book);
   };
 // Handler for add to library button click
   const handleAddToLibrary = (e) => {
+
     e.stopPropagation();
+
     if (!currentUser) {
+
       setShowPrompt(true);
-      return; 
+      return; // exit if not logged in
     }
     onToggleLibrary(book);
   };
 // Render BookCard component
   return (
-    <div className="bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition rounded-lg overflow-hidden flex flex-col">
+    <div className="bg-white
+    dark:bg-gray-800 
+    shadow-sm
+     hover:shadow-lg 
+     transition rounded-lg 
+     overflow-hidden 
+     flex flex-col">
       <div className="relative">
         {cover ? (
-          <img src={cover} alt={title} className="w-full h-44 object-cover" />
+          <img src={cover} alt={title} className="w-full 
+          h-44 object-cover" />
         ) : (
-          <div className="w-full h-44 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500">
+          <div className="w-full 
+          h-44 bg-gray-200 
+          dark:bg-gray-700 
+          flex items-center 
+          justify-center 
+          text-gray-500">
             No cover
           </div>
         )}
@@ -45,7 +63,12 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
         <button
           onClick={handleToggleLike}
           aria-label="Like book"
-          className="absolute top-2 right-2 p-2 rounded-full bg-white dark:bg-gray-900 shadow hover:scale-105 transform transition"
+          className="absolute top-2 
+          right-2 
+          p-2 rounded-full 
+          bg-white 
+          dark:bg-gray-900 
+          shadow hover:scale-105 transform transition"
         >
           {liked ? (
             <svg className="w-5 h-5 text-red-500" viewBox="0 0 24 24" fill="currentColor">
@@ -71,14 +94,19 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
       </div>
 
       <div className="p-4 flex-1 flex flex-col">
+
         <h3 className="font-semibold text-md mb-1 line-clamp-2">{title}</h3>
+
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
           {authorNames}
         </p>
+
         <div className="mt-auto flex items-center justify-between">
+
           <div className="text-xs text-gray-500 dark:text-gray-400">
             Downloads: {download_count}
           </div>
+          
           <div className="flex gap-2">
             {/* View button */}
             <button
@@ -92,15 +120,7 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
               View
             </button>
 
-            {/* Add to Library button (only shown after View)
-            {viewed && (
-              <button
-                onClick={handleAddToLibrary}
-                className="px-3 py-1.5 bg-green-600 text-white rounded-md text-sm hover:bg-green-700 transition"
-              >
-                {inLibrary ? "Remove" : "Add to Library"}
-              </button>
-            )} */}
+        
           </div>
         </div>
       </div>

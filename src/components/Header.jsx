@@ -132,7 +132,7 @@ function Header() {
               </NavLink>
             )}
             <NavLink
-            to="/Favourites"
+            to="/favourites"
             className={linkClasses}
             onClick={()=> setMobileOpen(false)}
             >Favorites</NavLink>

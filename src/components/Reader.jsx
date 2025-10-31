@@ -4,12 +4,12 @@ import Spinner from "./Spinner";
 function Reader({ book, onClose }) {
   const [content, setContent] = useState(""); // Book content state
   const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(false); // Error state
+  const [error, setError] = useState(false); 
 
-  const [fontSize, setFontSize] = useState(16); // Font size state
-  const contentRef = useRef(); // Ref for content container
+  const [fontSize, setFontSize] = useState(16); 
+  const contentRef = useRef(); 
 
-  // Fetch book content when book changes
+
 
   useEffect(() => {
     if (!book) return;
@@ -18,7 +18,7 @@ function Reader({ book, onClose }) {
     setError(false);
     setContent("");
 
-    // Try a list of likely readable formats (wide fallback)
+  
     const candidates = [
       "text/plain; charset=utf-8",
       "text/plain; charset=utf-16",
@@ -54,20 +54,20 @@ function Reader({ book, onClose }) {
   }, [book]);
 
   useEffect(() => {
-    // reset scroll to top when new content loaded
+  
     if (contentRef.current) contentRef.current.scrollTop = 0;
   }, [content]);
-  // Return null if no book is provided
+
   if (!book) return null;
 
   const authors = (book.authors || []).map((a) => a.name).join(", ") || "Unknown";
-  // Handlers for font size adjustment and scrolling
+
   const increase = () => setFontSize((s) => Math.min(24, s + 2));
   const decrease = () => setFontSize((s) => Math.max(12, s - 2));
   const scrollTop = () => {
     if (contentRef.current) contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
   };
-  // Render Reader component
+
   return (
     <div className="fixed inset-0 z-50 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-hidden flex flex-col">
       <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-800">

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
-import Ratings from "./Ratings";
 // BookCard component to display individual book details
 function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrary }) {
   // Auth context to check user authentication
@@ -71,13 +70,6 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
         </button>
       </div>
 
-      <div className="book-card">
-        <img src={book.image} alt={book.title} />
-        <h3>{book.title}</h3>
-        <p>{book.author}</p>
-        <Ratings />
-      </div>
-
       <div className="p-4 flex-1 flex flex-col">
         <h3 className="font-semibold text-md mb-1 line-clamp-2">{title}</h3>
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
@@ -100,7 +92,7 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
               View
             </button>
 
-            {/* Add to Library button (only shown after View)
+            {/* Add to Library button (only shown after View) */}
             {viewed && (
               <button
                 onClick={handleAddToLibrary}
@@ -108,7 +100,7 @@ function BookCard({ book, onView, liked, onToggleLike, onToggleLibrary, inLibrar
               >
                 {inLibrary ? "Remove" : "Add to Library"}
               </button>
-            )} */}
+            )}
           </div>
         </div>
       </div>

@@ -43,6 +43,10 @@ function Header() {
           <NavLink to="/" className={linkClasses}>
             Home
           </NavLink>
+          <NavLink to="/favorites" className={linkClasses}>
+            Favorites
+          </NavLink>
+
 
           {currentUser && (
             <NavLink to="/library" className={linkClasses}>

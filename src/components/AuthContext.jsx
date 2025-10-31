@@ -43,12 +43,7 @@ export function AuthProvider({ children }) {
     return unsubscribe; // cleanup listener
   }, []);
 // Value to be provided by the AuthContext
-  const value = {
-    currentUser,
-    login,
-    signup,
-    logout,
-  };
+  const value = {currentUser,login,signup,logout,};
 
   return (
     <AuthContext.Provider value={value}>

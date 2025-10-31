@@ -27,9 +27,12 @@ function BookModal({ book, onClose, onRead, inLibrary, onToggleLibrary }) {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
     >
       <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-xl shadow-2xl max-w-3xl w-full overflow-auto">
+
         <div className="flex items-start justify-between p-4 border-b border-gray-200 dark:border-gray-800">
+
           <div>
             <h2 className="text-xl font-bold">{book.title}</h2>
+
             <p className="text-sm text-gray-600 dark:text-gray-300">By {authors}</p>
           </div>
           <div className="flex items-center gap-2">
